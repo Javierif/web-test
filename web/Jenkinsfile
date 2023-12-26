@@ -28,7 +28,14 @@ pipeline {
 					steps {
 				       script{
 				           withSonarQubeEnv(credentialsId: 'jifjenkins', installationName: 'sonarqube-ingreq'){
-				              sh "$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectKey=web -Dsonar.sources=. "
+				              sh '''$SCANNER_HOME/bin/sonar-scanner \
+					         -Dsonar.projectKey=web \
+					         -Dsonar.projectName=web \
+					         -Dsonar.sources=src/ \
+					         -Dsonar.java.binaries=target/classes/ \
+					         -Dsonar.exclusions=src/test/java/****/*.java \
+					         -Dsonar.java.libraries=/var/lib/jenkins/.m2/**/*.jar \
+					         -Dsonar.projectVersion=0.0.1'''
 				            }
 				       }
 				    }
