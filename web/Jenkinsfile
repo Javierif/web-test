@@ -16,7 +16,7 @@ pipeline {
 				      SCANNER_HOME = tool 'ingreq-sonar-scanner'
 				    }
 				    steps {
-					    withSonarQubeEnv(credentialsId: 'jifjenkins', installationName: 'Sonar') {
+					    withSonarQubeEnv(credentialsId: 'jifjenkins', installationName: 'sonarqube-ingreq') {
 					         sh '''$SCANNER_HOME/bin/sonar-scanner \
 					         -Dsonar.projectKey=projectKey \
 					         -Dsonar.projectName=projectName \
