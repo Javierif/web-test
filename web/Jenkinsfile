@@ -22,22 +22,15 @@ pipeline {
 				    }
 				}
 				stage('SonarQube analysis') {
-				    environment {
-				      SCANNER_HOME = tool 'ingreq-sonar-scanner'
+					steps {
+				       script{
+				           withSonarQubeEnv ('Jenkins-sonar-server'){
+				              sh "/opt/sonar_scanner/sonar-scanner-4.0.0.1744-linux/bin/sonar-scanner/bin/sonar-scanner -Dsonar.projectKey=web -Dsonar.sources=. "
+				            }
+				       }
 				    }
-				    steps {
-					    withSonarQubeEnv(credentialsId: 'jifjenkins', installationName: 'sonarqube-ingreq') {
-					         sh '''$SCANNER_HOME/bin/sonar-scanner \
-					         -Dsonar.projectKey=web \
-					         -Dsonar.projectName=web \
-					         -Dsonar.sources=src/ \
-					         -Dsonar.java.binaries=target/classes/ \
-					         -Dsonar.exclusions=src/test/java/****/*.java \
-					         -Dsonar.java.libraries=/var/lib/jenkins/.m2/**/*.jar \
-					         -Dsonar.projectVersion=0.0.1'''
-					    }
-				    }
-				}
+				
+				  }
 				stage('SQuality Gate') {
 				  steps {
 				       timeout(time: 1, unit: 'MINUTES') {
