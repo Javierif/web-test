@@ -14,13 +14,13 @@ pipeline {
 				}
 				stage('Archive Artifact'){
 					steps{
-							archiveArtifacts artifacts:'target/*.war'
+							archiveArtifacts artifacts:'web/target/*.war'
 					}
 				}
 				stage('deployment'){
 					steps{
 						deploy adapters: [tomcat9(url: 'http://13.38.8.24:8080/',credentialsId: 'TomcatCreds')],
-						war: 'target/*.war',
+						war: 'web/target/*.war',
 						contextPath: 'app'
 					}
 				}
