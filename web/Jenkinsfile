@@ -5,12 +5,7 @@ pipeline {
 		     script: "printf \$(git rev-parse --short ${GIT_COMMIT})",
 		     returnStdout: true
 		    )
-		}
-		tools {
-		   maven 'maven'
-		   jdk 'java'
-		}
-		
+		}		
 		stages{
 				stage('Checkout Code'){
 					steps{
