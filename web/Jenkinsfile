@@ -11,6 +11,16 @@ pipeline {
 							bat "cd web && mvn clean install -Dmaven.test.skip=true"
 					}
 				}
+				stage('Mostrar SCANNER_HOME') {
+				    environment {
+				        SCANNER_HOME = tool 'ingreq-sonar-scanner'
+				    }
+				    steps {
+				        script {
+				            echo "El directorio SCANNER_HOME es: $SCANNER_HOME"
+				        }
+				    }
+				}
 				stage('SonarQube analysis') {
 				    environment {
 				      SCANNER_HOME = tool 'ingreq-sonar-scanner'
