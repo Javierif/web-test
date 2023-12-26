@@ -19,9 +19,9 @@ pipeline {
 				}
 				stage('deployment'){
 					steps{
-						sshagent(['deploy_user']) {
-							sh "scp -o StrictHostKeyChecking=no web/target/web.war ubuntu@13.38.8.24:/var/lib/tomcat9"
-						}
+						deploy adapters: [tomcat9(url: 'http://13.38.8.24:8080/',credentialsId: 'tomcatCreds')],
+						war: 'web/target/*.war',
+						contextPath: 'app'
 					}
 				}
 		}
