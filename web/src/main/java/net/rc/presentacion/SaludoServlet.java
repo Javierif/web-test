@@ -50,7 +50,7 @@ public class SaludoServlet extends HttpServlet implements Serializable
 			  out.println("<br>");
 			  out.println("Hello World");
 			  out.println("<br>"); 
-			  out.println("Hello " + txtNombre);			  
+			  out.println("Hello JIF" + txtNombre);			  
 			  out.println("</body>");
 			  out.println("</html>");
 
