@@ -19,9 +19,7 @@ pipeline {
 				}
 				stage('deployment'){
 					steps{
-						deploy adapters: [tomcat9(url: 'http://13.38.8.24:8080/',credentialsId: 'tomcatCreds')],
-						war: 'web/target/*.war',
-						contextPath: ''
+							archiveArtifacts artifacts:'web/target/*.war'
 					}
 				}
 		}
