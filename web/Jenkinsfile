@@ -24,7 +24,7 @@ pipeline {
 				stage('SonarQube analysis') {
 					steps {
 				       script{
-				           withSonarQubeEnv ('Jenkins-sonar-server'){
+				           withSonarQubeEnv(credentialsId: 'jifjenkins', installationName: 'sonarqube-ingreq'){
 				              sh "/opt/sonar_scanner/sonar-scanner-4.0.0.1744-linux/bin/sonar-scanner/bin/sonar-scanner -Dsonar.projectKey=web -Dsonar.sources=. "
 				            }
 				       }
