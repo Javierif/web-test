@@ -22,10 +22,13 @@ pipeline {
 				    }
 				}
 				stage('SonarQube analysis') {
+					environment {
+				        SCANNER_HOME = tool 'ingreq-sonar-scanner'
+				    }
 					steps {
 				       script{
 				           withSonarQubeEnv(credentialsId: 'jifjenkins', installationName: 'sonarqube-ingreq'){
-				              sh "C:\Users\swhm9\.jenkins\tools\hudson.plugins.sonar.SonarRunnerInstallation\ingreq-sonar-scanner\bin\sonar-scanner -Dsonar.projectKey=web -Dsonar.sources=. "
+				              sh "$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectKey=web -Dsonar.sources=. "
 				            }
 				       }
 				    }
