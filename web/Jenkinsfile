@@ -8,7 +8,7 @@ pipeline {
 				}
 				stage('Build'){
 					steps{
-							bat "cd web && mvn clean install -Dmaven.test.skip=true"
+					    bat "cd web && mvn clean install -Dmaven.test.skip=true"
 					}
 				}
 				stage('SonarQube analysis') {
